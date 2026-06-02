@@ -1,59 +1,143 @@
-
 <!DOCTYPE html>
 <html lang="sk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CookAI</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CookAI — Varte inteligentne s tým, čo máte doma</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header class="navbar glass">
-  <h1>CookAI</h1>
-  <div class="controls">
-    <select id="difficultyFilter">
-      <option value="all">Všetky obtiažnosti</option>
-      <option value="Ľahká">Ľahká</option>
-      <option value="Stredná">Stredná</option>
-      <option value="Náročná">Náročná</option>
-    </select>
-    <button id="themeToggle">🌙 Dark mode</button>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="glass hero-box">
-    <h2>Čo máte v chladničke?</h2>
-    <p>Pridaj ingrediencie oddelené čiarkou.</p>
-
-    <div class="input-group">
-      <input type="text" id="ingredientInput" placeholder="vajcia, syr, paradajky...">
-      <button id="addBtn">Pridať</button>
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#top" class="logo">
+        <span class="logo-mark">🍳</span>
+        <span class="logo-text">Cook<span class="logo-accent">AI</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="#features">Funkcie</a>
+        <a href="#app">Aplikácia</a>
+        <a href="#how">Ako to funguje</a>
+      </nav>
+      <a href="#app" class="btn btn-primary btn-sm">Začať variť</a>
     </div>
+  </header>
 
-    <div id="tags"></div>
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <div class="hero-bg">
+      <span class="float-tag" style="--d:0s; top:18%; left:8%">🍅 paradajka</span>
+      <span class="float-tag" style="--d:1.2s; top:30%; right:10%">🧄 cesnak</span>
+      <span class="float-tag" style="--d:2.4s; top:62%; left:14%">🧀 syr</span>
+      <span class="float-tag" style="--d:0.8s; top:70%; right:8%">🥚 vajcia</span>
+      <span class="float-tag" style="--d:1.8s; top:45%; left:48%">🌿 bazalka</span>
+    </div>
+    <div class="container hero-inner">
+      <span class="eyebrow">Inteligentný kuchynský pomocník</span>
+      <h1>Varte inteligentne s tým,<br/><span class="grad-text">čo máte doma</span></h1>
+      <p class="lead">Zadajte ingrediencie z vašej chladničky a CookAI vám okamžite odporučí recepty, ktoré môžete pripraviť.</p>
+      <div class="hero-cta">
+        <a href="#app" class="btn btn-primary btn-lg">Začať variť</a>
+        <button class="btn btn-ghost btn-lg" id="heroRandomBtn">🎲 Náhodný recept</button>
+      </div>
+      <div class="hero-stats">
+        <div><strong>20+</strong><span>receptov</span></div>
+        <div><strong>100%</strong><span>zadarmo</span></div>
+        <div><strong>10 s</strong><span>k receptu</span></div>
+      </div>
+    </div>
+  </section>
 
-    <div class="actions">
-      <button id="findBtn" class="primary">Nájdi recepty</button>
-      <button id="randomBtn" class="secondary">Náhodný recept</button>
+  <!-- ============ FEATURES ============ -->
+  <section class="features" id="features">
+    <div class="container">
+      <h2 class="section-title">Prečo CookAI?</h2>
+      <p class="section-sub">Tri jednoduché kroky k chutnému jedlu.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon">🥬</div>
+          <h3>Zadajte suroviny</h3>
+          <p>Napíšte čo máte v chladničke — vajcia, syr, cestoviny — pridajte ich ako štítky.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Inteligentné porovnanie</h3>
+          <p>CookAI spočíta percento zhody a ukáže len recepty, kde máte aspoň polovicu surovín.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">👩‍🍳</div>
+          <h3>Variť krok za krokom</h3>
+          <p>Otvorte recept a sledujte čisté inštrukcie — ideálne na obrazovke pri sporáku.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ APP ============ -->
+  <section class="app" id="app">
+    <div class="container">
+      <h2 class="section-title">Čo dnes uvaríme?</h2>
+      <p class="section-sub">Pridajte suroviny, ktoré máte doma a nechajte CookAI nájsť recepty.</p>
+
+      <div class="ingredient-panel">
+        <label for="ingredientInput" class="field-label">Vaše suroviny</label>
+        <div class="input-row">
+          <input type="text" id="ingredientInput" placeholder="Napr. vajcia, syr, paradajky..." autocomplete="off"/>
+          <button class="btn btn-primary" id="addBtn">Pridať</button>
+        </div>
+
+        <div class="tags" id="tagList" aria-live="polite"></div>
+
+        <div class="action-row">
+          <button class="btn btn-primary btn-lg" id="findBtn">🔍 Nájdi recepty</button>
+          <button class="btn btn-ghost btn-lg" id="randomBtn">🎲 Náhodný recept</button>
+          <button class="btn btn-text" id="clearBtn">Vyčistiť</button>
+        </div>
+      </div>
+
+      <div class="results" id="results"></div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="how" id="how">
+    <div class="container how-inner">
+      <div>
+        <span class="eyebrow">Ako to funguje</span>
+        <h2 class="section-title left">Jednoducho ako recept od babičky.</h2>
+        <ol class="steps">
+          <li><strong>1.</strong> Pridajte suroviny, ktoré máte doma.</li>
+          <li><strong>2.</strong> CookAI nájde recepty s aspoň 50% zhodou.</li>
+          <li><strong>3.</strong> Otvorte recept a začnite variť.</li>
+        </ol>
+      </div>
+      <div class="how-card glass">
+        <div class="how-card-row"><span class="chip chip-have">✓ vajcia</span><span class="chip chip-have">✓ syr</span><span class="chip chip-miss">+ paradajky</span></div>
+        <div class="progress"><div class="progress-fill" style="width:72%"></div></div>
+        <p class="how-card-meta">72% zhoda · Omeleta s paradajkami</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="logo"><span class="logo-mark">🍳</span><span class="logo-text">Cook<span class="logo-accent">AI</span></span></span>
+      <p>© <span id="year"></span> CookAI · Varíme inteligentne.</p>
+    </div>
+  </footer>
+
+  <!-- ============ MODAL ============ -->
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Zavrieť">✕</button>
+      <div class="modal-content" id="modalContent"></div>
     </div>
   </div>
-</section>
 
-<section class="recipes-section">
-  <h2>Vybrané recepty</h2>
-  <div id="recipes" class="recipes-grid"></div>
-</section>
-
-<div id="modal" class="modal hidden">
-  <div class="modal-content glass">
-    <span id="closeModal">&times;</span>
-    <div id="modalBody"></div>
-  </div>
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
