@@ -1,194 +1,59 @@
+
 <!DOCTYPE html>
 <html lang="sk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CookAI</title>
+  <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="bg-pattern"></div>
+<header class="navbar glass">
+  <h1>CookAI</h1>
+  <div class="controls">
+    <select id="difficultyFilter">
+      <option value="all">Všetky obtiažnosti</option>
+      <option value="Ľahká">Ľahká</option>
+      <option value="Stredná">Stredná</option>
+      <option value="Náročná">Náročná</option>
+    </select>
+    <button id="themeToggle">🌙 Dark mode</button>
+  </div>
+</header>
 
-  <header class="topbar glass">
-    <a class="brand" href="#domov" aria-label="CookAI domov">
-      <span class="brand-mark">◌</span>
-      <span>CookAI</span>
-    </a>
+<section class="hero">
+  <div class="glass hero-box">
+    <h2>Čo máte v chladničke?</h2>
+    <p>Pridaj ingrediencie oddelené čiarkou.</p>
 
-    <nav class="nav">
-      <a href="#funkcie">Funkcie</a>
-      <a href="#aplikacia">Aplikácia</a>
-      <a href="#recepty">Recepty</a>
-    </nav>
+    <div class="input-group">
+      <input type="text" id="ingredientInput" placeholder="vajcia, syr, paradajky...">
+      <button id="addBtn">Pridať</button>
+    </div>
 
-    <a class="topbar-cta" href="#aplikacia">Začať variť</a>
-  </header>
+    <div id="tags"></div>
 
-  <main>
-    <section id="domov" class="hero section">
-      <div class="hero-copy">
-        <span class="eyebrow">Kitchen Hearth · recepty podľa surovín</span>
-        <h1>Varte inteligentne s tým, čo máte doma</h1>
-        <p>
-          Zadajte suroviny z chladničky a CookAI vám navrhne recepty, ktoré viete pripraviť hneď teraz.
-          Moderný pomocník pre domáce varenie s jemným, teplým a prehľadným dizajnom.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#aplikacia">Začať variť</a>
-          <button class="btn btn-secondary" id="randomHeroBtn" type="button">Náhodný recept</button>
-        </div>
-
-        <div class="hero-pills" aria-label="Vlastnosti aplikácie">
-          <span>🍅 Smart matching</span>
-          <span>🟢 Dostupné suroviny</span>
-          <span>🔴 Chýbajúce suroviny</span>
-        </div>
-      </div>
-
-      <div class="hero-visual glass">
-        <div class="hero-card-main">
-          <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1200&q=80" alt="Jedlo na stole" />
-          <div class="hero-card-overlay">
-            <span class="tiny-label">Odporúčaný recept</span>
-            <h2>Krémové rizoto s hubami</h2>
-            <div class="mini-stats">
-              <span>⏱ 25 min</span>
-              <span>⭐ 82% zhoda</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="funkcie" class="section features">
-      <div class="section-heading">
-        <span class="eyebrow">Prečo CookAI</span>
-        <h2>Premyslený dizajn pre rýchle a príjemné varenie</h2>
-      </div>
-
-      <div class="feature-grid">
-        <article class="feature-card glass">
-          <div class="feature-icon">✦</div>
-          <h3>Inteligentné filtrovanie</h3>
-          <p>Recepty sa zobrazia iba vtedy, keď majú aspoň 50 % zhody s vašimi surovinami.</p>
-        </article>
-
-        <article class="feature-card glass">
-          <div class="feature-icon">◌</div>
-          <h3>Tag systém surovín</h3>
-          <p>Ingrediencie pridávate cez vstupné pole, tagy viete okamžite odstrániť jedným klikom.</p>
-        </article>
-
-        <article class="feature-card glass">
-          <div class="feature-icon">✿</div>
-          <h3>Detail receptu v modale</h3>
-          <p>Každý recept má prehľadný detail s postupom varenia, časom a počtom porcií.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="aplikacia" class="section app-layout">
-      <div class="app-panel glass">
-        <div class="panel-header">
-          <div>
-            <span class="eyebrow">Zadaj suroviny</span>
-            <h2>Čo máte v chladničke?</h2>
-          </div>
-          <button class="ghost-btn" id="randomRecipeBtn" type="button">Náhodný recept</button>
-        </div>
-
-        <div class="input-wrap">
-          <label for="ingredientInput">Surovina</label>
-          <div class="input-row">
-            <input id="ingredientInput" type="text" placeholder="Napr. vajcia, syr, paradajky..." autocomplete="off" />
-            <button class="btn btn-primary" id="addIngredientBtn" type="button">Pridať</button>
-          </div>
-          <p class="helper">Stlač Enter alebo klikni na Pridať.</p>
-        </div>
-
-        <div class="tags-section">
-          <div class="tags-title">
-            <span class="tiny-label">Pridané suroviny</span>
-            <span class="counter" id="ingredientCount">0</span>
-          </div>
-          <div id="ingredientTags" class="tags"></div>
-        </div>
-
-        <div class="actions">
-          <button class="btn btn-primary" id="findRecipesBtn" type="button">Nájdi recepty</button>
-          <button class="btn btn-secondary" id="clearBtn" type="button">Vymazať suroviny</button>
-        </div>
-      </div>
-
-      <aside class="summary-panel glass">
-        <span class="eyebrow">Tip</span>
-        <h3>Vyskúšaj kombinácie ako:</h3>
-        <ul class="tip-list">
-          <li>vajcia, maslo, chlieb</li>
-          <li>cestoviny, paradajky, syr</li>
-          <li>ryža, kuracie, cesnak</li>
-        </ul>
-        <div class="summary-card">
-          <p class="summary-label">Dnešný cieľ</p>
-          <strong>Rýchlo nájsť jedlo z dostupných surovín.</strong>
-        </div>
-      </aside>
-    </section>
-
-    <section id="recepty" class="section results-section">
-      <div class="section-heading compact">
-        <span class="eyebrow">Odporúčania</span>
-        <h2>Vybrané recepty</h2>
-        <p>Po kliknutí na kartu sa otvorí detail s presným zoznamom ingrediencií a postupom.</p>
-      </div>
-
-      <div id="statusMessage" class="status-message hidden"></div>
-      <div id="recipesContainer" class="recipes-grid"></div>
-    </section>
-  </main>
-
-  <div id="recipeModal" class="modal hidden" aria-hidden="true">
-    <div class="modal-backdrop" id="closeModalBackdrop"></div>
-    <div class="modal-card glass" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close" id="closeModalBtn" aria-label="Zavrieť modal">×</button>
-      <div id="modalContent"></div>
+    <div class="actions">
+      <button id="findBtn" class="primary">Nájdi recepty</button>
+      <button id="randomBtn" class="secondary">Náhodný recept</button>
     </div>
   </div>
+</section>
 
-  <template id="recipeCardTemplate">
-    <article class="recipe-card glass">
-      <div class="recipe-image-wrap">
-        <img class="recipe-image" alt="" />
-        <span class="difficulty-badge"></span>
-      </div>
-      <div class="recipe-body">
-        <div class="recipe-top">
-          <h3 class="recipe-title"></h3>
-          <span class="match-pill"></span>
-        </div>
-        <div class="recipe-meta">
-          <span class="meta-time"></span>
-          <span class="meta-servings"></span>
-        </div>
-        <div class="match-bar"><span></span></div>
-        <div class="ingredient-preview">
-          <div>
-            <span class="tiny-label">Dostupné</span>
-            <div class="preview-list available"></div>
-          </div>
-          <div>
-            <span class="tiny-label">Chýbajúce</span>
-            <div class="preview-list missing"></div>
-          </div>
-        </div>
-      </div>
-    </article>
-  </template>
+<section class="recipes-section">
+  <h2>Vybrané recepty</h2>
+  <div id="recipes" class="recipes-grid"></div>
+</section>
 
-  <script src="script.js"></script>
+<div id="modal" class="modal hidden">
+  <div class="modal-content glass">
+    <span id="closeModal">&times;</span>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
